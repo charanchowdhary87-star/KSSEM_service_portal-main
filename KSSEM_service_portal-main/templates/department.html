@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Department</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <header class="sub-header card">
+      <div class="sub-actions"><a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a></div>
+      <div>
+        <h1>Department</h1>
+        <p class="muted">Select department</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="subcat-grid dept-grid">
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=CSE">
+          <div class="dept-emoji">💻</div>
+          <div class="dept-label">CSE</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=ECE">
+          <div class="dept-emoji">🔌</div>
+          <div class="dept-label">ECE</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=AIDS">
+          <div class="dept-emoji">🤖</div>
+          <div class="dept-label">AIDS</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=MECH">
+          <div class="dept-emoji">⚙️</div>
+          <div class="dept-label">MECH</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=CIVIL">
+          <div class="dept-emoji">🏗️</div>
+          <div class="dept-label">CIVIL</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Department&sub=CSBS">
+          <div class="dept-emoji">📊</div>
+          <div class="dept-label">CSBS</div>
+        </a>
+      </div>
+    </section>
+  </main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Transportation</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <header class="sub-header card">
+      <div class="sub-actions"><a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a></div>
+      <div><h1>Transportation</h1><p class="muted">Raise a complaint about Transportation</p></div>
+    </header>
+    <section class="card form-section">
+      <form id="complaintForm">
+        <input type="hidden" id="category" value="Transportation">
+        
+        <label>Title</label>
+        <input id="compTitle" type="text" required>
+
+        <label>Description</label>
+        <textarea id="description" rows="6" required></textarea>
+
+        <div class="row">
+          <div>
+            <label>Location (optional)</label>
+            <input id="location" type="text" />
+          </div>
+          <div>
+            <label>Contact (optional)</label>
+            <input id="contact" type="text" />
+          </div>
+        </div>
+
+        <label>Attach image</label>
+        <input id="imageFile" type="file" accept="image/*" />
+        <img id="imgPreview" class="img-preview" style="display:none" />
+
+        <div class="form-actions">
+          <button id="submitBtn" class="small-btn primary" type="submit" >Submit</button>
+          <a class="small-btn ghost" href="{{ url_for('home') }}" style=" color: white;background-color: rgb(252, 66, 66); text-decoration: none; ">Cancel</a>
+        </div>
+        <p id="offlineMsg" class="muted" style="display:none">Offline: saved locally and will sync when online.</p>
+      </form>
+
+      <div id="success" style="display:none" class="after-submit">
+        <h3 style="color: #2ecc71; margin-bottom: 20px;">✅ Complaint Submitted Successfully</h3>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 2px solid #ddd; margin-bottom: 20px;">
+          <p style="font-size: 1.1em; margin-bottom: 10px;">Your Reference ID:</p>
+          <strong id="ref" style="font-size: 1.4em; color: #2c3e50; display: block; margin-bottom: 15px; font-family: monospace;"></strong>
+          <div style="background: #e8f4f8; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+            <p style="color: #2c3e50; font-size: 0.9em; margin-bottom: 8px;">Reference ID Format:</p>
+            <p style="color: #666; font-size: 0.85em; margin-bottom: 4px;">KSSEM-XXX-YYMMDD-HHMM-RRRR</p>
+            <ul style="color: #666; font-size: 0.85em; margin: 0; padding-left: 20px;">
+              <li>XXX: Category code (SEC, MNT, etc.)</li>
+              <li>YYMMDD: Date of submission</li>
+              <li>HHMM: Time of submission</li>
+              <li>RRRR: Unique identifier</li>
+            </ul>
+          </div>
+          <p style="color: #666; font-size: 0.9em; margin-bottom: 8px;"><strong>Important:</strong> Please save this ID to check your complaint status later</p>
+          <p style="color: #666; font-size: 0.9em;">You can track your complaint status anytime in the "Complaints" section using this ID</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a class="btn primary" href="{{ url_for('complaints_page') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Track Complaint</a>
+        </div>
+      </div>
+    </section>
+  </main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

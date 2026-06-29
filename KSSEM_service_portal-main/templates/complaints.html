@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  
+  <title>Complaints</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <header class="sub-header card">
+    <div class="sub-actions"><a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a></div>
+
+      <div><h1>Complaints</h1><p class="muted">Search by reference ID or view all</p></div>
+    </header>
+
+    <section class="card">
+      <div class="search-row" style="margin-bottom: 20px; display:flex; gap:12px; align-items:center;">
+        <input id="searchInput"  style="width: 200px; height: 40px; font-size: 16px; padding: 5px 10px; border-radius: 6px; border-color: black;" placeholder="Enter tracking ID" />
+        <!-- CUSTOMIZE: Search button (pill) - modify styles in static/style.css -->
+        <button id="complaintSearchBtn" type="button" class="search-pill small-btn ghost">
+          <span class="icon">🔍</span>
+          <span class="label">Search</span>
+        </button>
+      </div>
+      <div class="table-container" style="overflow-x: auto;">
+        <!-- CUSTOMIZE: Table border color (#666) -->
+        <table style="width: 100%; border-collapse: collapse; border: 2px solid #2e2e2e;">
+          <thead>
+            <tr style="border-bottom: 2px solid #2e2e2e; text-align: left;">
+              <th style="padding: 12px; border-right: 1px solid #666;">ID</th>
+              <th style="padding: 12px; border-right: 1px solid #666;">Title</th>
+              <th style="padding: 12px; border-right: 1px solid #666;">Category</th>
+              <th style="padding: 12px;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="complaintsList" style="border-bottom: 1px solid #666;">
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+ 
+<!-- Detail modal for complaints page (read-only, includes timeline) -->
+<div id="detailModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 2100; overflow-y: auto;">
+  <div style="background: white; margin: 28px auto; max-width: 920px; border-radius: 10px; padding: 30px; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(10,20,30,0.25);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2 id="detailTitle" style="margin: 0;">Complaint Details</h2>
+      <button id="closeDetailBtn" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666;">&times;</button>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="font-weight: bold;">Tracking ID:</label>
+      <p id="detailTrackingId" style="margin: 5px 0; font-family: monospace; background: #e0e0e0; padding: 10px; border-radius: 4px;"></p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 12px;">
+      <div>
+        <label style="font-weight: bold;">Category:</label>
+        <p id="detailCategory" style="margin: 5px 0;"></p>
+      </div>
+      <div>
+        <label style="font-weight: bold;">Location:</label>
+        <p id="detailLocation" style="margin: 5px 0;"></p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="font-weight: bold;">Created At:</label>
+      <p id="detailCreatedAt" style="margin: 5px 0;"></p>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="font-weight: bold;">Title:</label>
+      <p id="detailComplaintTitle" style="margin: 5px 0; background: #e0e0e0; padding: 10px; border-radius: 4px;"></p>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="font-weight: bold;">Description:</label>
+      <p id="detailDescription" style="margin: 5px 0; background: #e0e0e0; padding: 15px; border-radius: 4px; white-space: pre-wrap; line-height: 1.6;"></p>
+    </div>
+
+    <div id="imageContainer" style="margin-bottom: 12px; display: none;">
+      <label style="font-weight: bold;">Attached Image:</label>
+      <img id="detailImage" src="" alt="Complaint Image" style="max-width: 100%; max-height: 400px; margin-top: 10px; border-radius: 4px; border: 1px solid #ddd;">
+    </div>
+
+    <div style="margin-top: 18px; margin-bottom: 8px;">
+      <label style="font-weight: bold;">Timeline</label>
+      <div id="timelineContainer" style="margin-top: 12px;"></div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:20px;">
+      <button id="closeDetailBtn2" class="small-btn ghost" style="border:1px solid black;">Close</button>
+    </div>
+  </div>
+</div>

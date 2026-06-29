@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>KSSEM Service Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+ <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">KSSEM Service Portal</div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div id="adminEmailDisplay" style="font-weight:700;display:none;color:#0b2;"></div>
+        <button id="logoutBtn" class="small-btn ghost" style="display:none">Logout</button>
+        <div>
+          <a class="nav-btn" href="{{ url_for('complaint_form') }}" style="margin-left:7px">Raise a Complaint</a>
+          <a class="nav-link" href="{{ url_for('complaints_page') }}" style="margin-left:7px">Complaints</a>
+          <a class="nav-link" href="{{ url_for('admin_dashboard_page') }}" style="margin-left:7px">Admin</a>
+          <a class="nav-link" href="{{ url_for('about_page') }}" style="margin-left:7px;">About us</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero card">
+      <h2>Raise a Complaint</h2>
+      <p>Select a category to submit your complaint</p>
+      <div class="categories-grid">
+        <a class="cat-card" href="{{ url_for('department') }}">
+          <div class="cat-icon">🏢</div>
+          <div class="cat-label">Department</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('maintenance') }}">
+          <div class="cat-icon">🔧</div>
+          <div class="cat-label">Maintenance</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('security') }}">
+          <div class="cat-icon">🛡️</div>
+          <div class="cat-label">Security</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('parking') }}">
+          <div class="cat-icon">🚗</div>
+          <div class="cat-label">Parking</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('transportation') }}">
+          <div class="cat-icon">🚌</div>
+          <div class="cat-label">Transportation</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('canteen') }}">
+          <div class="cat-icon">🍴</div>
+          <div class="cat-label">Canteen</div>
+        </a>
+
+        <a class="cat-card" href="{{ url_for('library') }}">
+          <div class="cat-icon">📚</div>
+          <div class="cat-label">Library</div>
+        </a>
+      
+
+        <a class="cat-card" href="{{ url_for('complaint_form') }}?category=Others">
+          <div class="cat-icon">✨</div>
+          <div class="cat-label">Others</div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

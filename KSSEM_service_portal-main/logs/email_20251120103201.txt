@@ -1,0 +1,4 @@
+To: kssem.service.portal@gmail.com
+Subject: KSSEM Portal: Admin login by litheshv333@gmail.com for Department::CSBS
+
+Admin litheshv333@gmail.com logged in for category Department::CSBS at 2025-11-20T10:32:01.331356 UTC.

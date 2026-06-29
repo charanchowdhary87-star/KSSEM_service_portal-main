@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About - KSSEM Service Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">KSSEM Service Portal</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="adminEmailDisplay" style="font-weight:700;display:none;color:#0b2;"></div>
+      <button id="logoutBtn" class="small-btn ghost" style="display:none">Logout</button>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="card" style="padding: 20px;">
+    <div class="sub-actions"><a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a></div>
+
+    <!-- Increase font-weight value (300-900) to make headings thicker -->
+    <h2 style="font-weight: 750;">About KSSEM Service Portal</h2>
+
+    <p style="font-weight: 600;">
+        The KSSEM Service Portal is a digital platform designed to help students and staff report issues 
+        within the college more efficiently. Whether it's a maintenance request, security concern, transport issue, 
+        or a suggestion to improve campus facilities, users can quickly raise complaints without the need for 
+        login or disclosure of identity.
+    </p>
+
+    <h2 style="margin-top: 40px; font-weight: 750;">Key Features:</h2>
+    <!-- Increase font-weight value (300-900) to make list items thicker -->
+    <ul style="font-weight: 600;">
+        <li><strong>🔐 Anonymous Complaint Submission:</strong> Report issues freely without revealing identity.</li>
+        <li><strong>📋 Category-Based Management:</strong> Complaints reach the correct department faster.</li>
+        <li><strong>🎯 Tracking System:</strong> Unique reference ID to monitor complaint status anytime.</li>
+        <li><strong>⚙️ Organized Workflow:</strong> Admins handle complaints via a secure and structured dashboard.</li>
+    </ul>
+
+    <h2 style="margin-top: 40px; font-weight: 750;">Safety & Misuse Policy:</h2>
+    <p style="font-weight: 600;">
+        To maintain a <strong>respectful</strong>, <strong>secure</strong>, and <strong>trustworthy</strong> environment, this portal includes strict monitoring systems.
+        While anonymity is supported, <strong>misuse will not be tolerated</strong>.
+    </p>
+    <p><strong>Any attempt to:</strong></p>
+      <ul style="font-weight: 600;">
+          <li>❌ Submit fake or misleading complaints</li>
+          <li>❌ Defame individuals or departments </li>
+          <li>❌ Use offensive or abusive language </li>
+          <li>❌ Disrupt campus operations intentionally </li>
+    </ul>
+        
+
+    <p>
+        Such actions may result in <strong>disciplinary measures</strong>.  
+        We securely log IP addresses, timestamps, and browser details to track misuse if required.
+    </p>
+
+    <h2 style="margin-top: 40px; font-weight: 750;">Our Mission:</h2>
+    <p style="font-weight: 600;">
+        To create a <strong>connected</strong>, <strong>responsive</strong>, and <strong>problem-free</strong> campus by simplifying the process of raising concerns 
+        and speeding up resolutions. Every voice matters — your feedback helps improve our campus for everyone.
+    </p>
+
+    <p style="margin-top: 20px;"><strong>📧 Contact us:</strong> kssem.service.portal@gmail.com</p>
+    </section>
+</main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

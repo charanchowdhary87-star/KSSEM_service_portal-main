@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Admin Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <section class="card form-section">
+      <div class="sub-actions" style="margin-bottom: 30px;">
+        <a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a>
+      </div>
+      
+      <h2 style="margin-bottom: 30px;">Admin Login</h2>
+
+      <form id="adminLoginForm" style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 1.0em; font-weight:700;">Category</label>
+          <select id="adminSelection" style="padding: 10px; font-size: 1em;">
+            <option value="">-- select category --</option>
+            <option value="security">security</option>
+            <option value="maintenance">maintenance</option>
+            <option value="transportation">transportation</option>
+            <option value="library">library</option>
+            <option value="canteen">canteen</option>
+            <option value="others">others</option>
+            <optgroup label="Department">
+              <option value="Department::CSE">Department › CSE</option>
+              <option value="Department::ECE">Department › ECE</option>
+              <option value="Department::AIDS">Department › AIDS</option>
+              <option value="Department::MECH">Department › MECH</option>
+              <option value="Department::CIVIL">Department › CIVIL</option>
+              <option value="Department::CSBS">Department › CSBS</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 1.0em; font-weight:700;">Email (required)</label>
+          <input id="adminEmail" type="email" required placeholder="you@domain.com" style="padding: 10px; font-size: 1em;" />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 1.0em; font-weight:700;">Category Password(Not your email password)</label>
+          <input id="adminPassword" type="password" required style="padding: 10px; font-size: 1em;" />
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px"><input id="rememberMe" type="checkbox" checked/> Remember me</label>
+
+        <div class="form-actions" style="margin-top: 8px;">
+          <button class="small-btn primary" type="submit" style="padding: 12px 30px; font-size: 1.1em;">Login</button>
+        </div>
+
+        <p id="adminMsg" class="muted" style="color:#b00020; display:none; margin-top: 8px;"></p>
+      </form>
+    </section>
+  </main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

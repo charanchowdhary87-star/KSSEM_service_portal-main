@@ -1,0 +1,4 @@
+To: kssem.service.portal@gmail.com
+Subject: KSSEM Portal: Admin login by test@test.com for Department::CSE
+
+Admin test@test.com logged in for category Department::CSE at 2025-11-20T10:13:27.743131 UTC.

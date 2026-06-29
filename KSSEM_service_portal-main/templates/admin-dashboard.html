@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Admin Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <section class="card">
+      <div class="sub-actions">
+        <a class="link" href="{{ url_for('home') }}" style=" font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a>
+      </div>
+      <h2 id="adminTitle" style="margin-top: 50px;">{{ (admin_selection or 'Admin') }} — Admin Dashboard</h2>
+      <div class="filters" 
+        style="margin-bottom: 30px; display: flex; align-items: center; gap: 30px;">
+        
+        <input id="q" style="width: 200px; height: 40px; font-size: 16px; padding: 5px 10px; border-radius: 6px;" placeholder="Enter tracking ID">
+        <!-- CUSTOMIZE: Search button (pill) - modify styles in static/style.css -->
+        <button id="adminSearchBtn" type="button" class="search-pill small-btn ghost">
+          <span class="icon">🔍</span>
+          <span class="label">Search</span>
+        </button>
+
+        <select id="statusFilter" class="filter-select">
+          <option value="">All Status</option>
+          <option value="Queued">Queued</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Solved">Solved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+
+        <select id="sort" class="filter-select">
+          <option value="created_at_desc">Newest</option>
+          <option value="created_at_asc">Oldest</option>
+          <option value="status">Status</option>
+        </select>
+
+        <!-- Spacer pushes the next items to the right -->
+        <div style="flex-grow: 1;"></div>
+
+        <a id="logoutBtn" class="small-btn ghost" 
+          style="font-weight: bold; color: white; text-decoration: none;padding: 5px 15px; border-radius: 4px; background-color: rgb(250, 106, 106);">
+          logout
+        </a>
+
+        <button id="exportCsv" class="small-btn primary">Export CSV</button>
+      </div>
+
+
+      <table class="table" id="adminTable" data-selection="{{ admin_selection or '' }}" data-admin-email="{{ admin_email or '' }}" style="width: 100%; border-collapse: collapse; border: 2px solid #666;">
+        <thead>
+          <tr style="background: #f8f9fa;">
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #666; border-right: 1px solid #666;">ID</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #666; border-right: 1px solid #666;">Title</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #666; border-right: 1px solid #666;">Category</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #666; border-right: 1px solid #666;">Status</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #666;">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      
+    </section>
+  </main>
+  <!-- Detailed View Modal (moved outside of .card to avoid hover/transform glitches) -->
+  <div id="detailModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 2100; overflow-y: auto;">
+    <div style="background: white; margin: 28px auto; max-width: 920px; border-radius: 10px; padding: 30px; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(10,20,30,0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 id="detailTitle" style="margin: 0;">Complaint Details</h2>
+        <button id="closeDetailBtn" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666;">&times;</button>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Tracking ID:</label>
+        <!-- CUSTOMIZE: Grey background color (#e0e0e0) -->
+        <p id="detailTrackingId" style="margin: 5px 0; font-family: monospace; background: #e0e0e0; padding: 10px; border-radius: 4px;"></p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div>
+          <label style="font-weight: bold;">Category:</label>
+          <p id="detailCategory" style="margin: 5px 0;"></p>
+        </div>
+        <div>
+          <label style="font-weight: bold;">Status:</label>
+          <!-- CUSTOMIZE: Select border color (#999) -->
+          <select id="detailStatusSelect" style="width: 100%; padding: 8px; border: 1px solid #999; border-radius: 4px; margin-top: 5px;">
+            <option value="Queued">Queued</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Solved">Solved</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div>
+          <label style="font-weight: bold;">Location:</label>
+          <p id="detailLocation" style="margin: 5px 0;"></p>
+        </div>
+        <div>
+          <label style="font-weight: bold;">Contact:</label>
+          <p id="detailContact" style="margin: 5px 0;"></p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Created At:</label>
+        <p id="detailCreatedAt" style="margin: 5px 0;"></p>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">IP Address:</label>
+        <!-- CUSTOMIZE: Grey background color (#e0e0e0) -->
+        <p id="detailIp" style="margin: 5px 0; font-family: monospace; background: #e0e0e0; padding: 10px; border-radius: 4px;">Not recorded</p>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Title:</label>
+        <!-- CUSTOMIZE: Grey background color (#e0e0e0) -->
+        <p id="detailComplaintTitle" style="margin: 5px 0; background: #e0e0e0; padding: 10px; border-radius: 4px;"></p>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Description:</label>
+        <!-- CUSTOMIZE: Grey background color (#e0e0e0) -->
+        <p id="detailDescription" style="margin: 5px 0; background: #e0e0e0; padding: 15px; border-radius: 4px; white-space: pre-wrap; line-height: 1.6;"></p>
+      </div>
+
+      <div id="imageContainer" style="margin-bottom: 20px; display: none;">
+        <label style="font-weight: bold;">Attached Image:</label>
+        <img id="detailImage" src="" alt="Complaint Image" style="max-width: 100%; max-height: 400px; margin-top: 10px; border-radius: 4px; border: 1px solid #ddd;">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 30px; border-top: 1px solid #000000; padding-top: 20px;">
+        <button id="updateDetailBtn" class="small-btn primary" style="flex: 1;">Update Status</button>
+        <button id="blockIpBtn" class="small-btn ghost" style="flex: 1; background-color: rgb(250, 106, 106)">Block IP</button>
+        <button id="deleteDetailBtn" class="small-btn ghost" style="flex: 1;border: 1px solid black;">Delete Complaint</button>
+        <button id="closeDetailBtn2" class="small-btn ghost" style="flex: 1;border: 1px solid black;">Close</button>
+      </div>
+    </div>
+  </div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

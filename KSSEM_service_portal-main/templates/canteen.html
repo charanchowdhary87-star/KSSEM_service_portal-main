@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Canteen</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <main class="container">
+    <header class="sub-header card">
+      <div class="sub-actions"><a class="link" href="{{ url_for('home') }}" style="font-weight: bold; color: black; text-decoration: none; border: 2px solid black; padding: 5px 15px; border-radius: 4px;">Back</a></div>
+      <div>
+        <h1>Canteen</h1>
+        <p class="muted">Choose canteen concern</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="subcat-grid dept-grid">
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Pricing">
+          <div class="dept-emoji">💰</div>
+          <div class="dept-label">Pricing</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Food%20Quality">
+          <div class="dept-emoji">🍽️</div>
+          <div class="dept-label">Food Quality</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Cleanliness">
+          <div class="dept-emoji">✨</div>
+          <div class="dept-label">Cleanliness</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Waste%20management">
+          <div class="dept-emoji">♻️</div>
+          <div class="dept-label">Waste management</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Crowded%20areas">
+          <div class="dept-emoji">👥</div>
+          <div class="dept-label">Crowded areas</div>
+        </a>
+        <a class="subcat-card" href="{{ url_for('complaint_form') }}?category=Canteen&sub=Xerox%20shop">
+          <div class="dept-emoji">📄</div>
+          <div class="dept-label">Xerox shop</div>
+        </a>
+      </div>
+    </section>
+  </main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
